@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anniversary Shandi &amp; Agis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Layar pembuka: klik ini membuat lagu bisa langsung diputar -->
+<div id="gerbang">
+  <div>
+    <h2>Selamat Anniversary, Sayang 💌</h2>
+    <p>Nyalakan suara, lalu sentuh hatinya untuk membuka kejutan dari Shandi.</p>
+    <button class="tombol love" id="buka" aria-label="Buka hati kita">
+      <svg viewBox="0 0 32 29" aria-hidden="true"><path d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 21.2 6.1-9.3 16-12.1 16-21.2C32 3.8 28.2 0 23.6 0z"/></svg>
+      <span>Buka<br>hati kita</span>
+    </button>
+  </div>
+</div>
+
+<div id="hearts" aria-hidden="true"></div>
+
+<!-- GANTI nama file lagu sesuai file kamu -->
+<audio id="lagu" src="untukku.mp3" loop preload="auto"></audio>
+<button id="musik" aria-label="Putar atau jeda lagu">♪</button>
+
+<main>
+  <section class="hero">
+    <!-- GANTI foto1.jpg dengan foto kalian berdua -->
+    <img class="foto-utama" src="foto1.png" alt="Foto kita berdua">
+    <p class="lencana">Anniversary ke-<span id="ke">4</span></p>
+    <p class="nama">Shandi Kurnia Illahi <span>♥</span> Agis Agistianah</p>
+    <h1>Selamat anniversary, <em id="tahun">4 tahun</em> bersamamu</h1>
+    <p>Sejak 15 September 2022, kamu jadi rumah ternyaman untukku. Terima kasih sudah bertahan dan membuat setiap hari terasa hangat.</p>
+  </section>
+
+  <section>
+    <h2 class="judul">Perjalanan kita</h2>
+    <p class="sub">Dimulai 15 September 2022, dan jalannya masih panjang</p>
+
+    <div class="jalan-wrap">
+      <svg class="jalan" id="jalan" viewBox="-50 0 1000 340" role="img" aria-label="Jalan perjalanan cinta dari 15 September 2022 sampai seterusnya, dengan sepasang kekasih berjalan bergandengan tangan">
+        <!-- Jalan -->
+        <path id="rute" d="M30 250 C180 250 200 110 380 150 S620 270 870 100" fill="none" stroke="#1d0a15" stroke-width="54" stroke-linecap="round"/>
+        <path d="M30 250 C180 250 200 110 380 150 S620 270 870 100" fill="none" stroke="#4b3a52" stroke-width="46" stroke-linecap="round"/>
+        <path d="M30 250 C180 250 200 110 380 150 S620 270 870 100" fill="none" stroke="#f2c879" stroke-width="3" stroke-dasharray="14 12"/>
+
+        <!-- Titik kenangan (diisi oleh script.js) -->
+        <g id="titik"></g>
+
+        <!-- Pasangan (foto) berjalan mengikuti jalan -->
+        <defs>
+          <clipPath id="klip-a"><circle cx="-27" cy="-30" r="25"/></clipPath>
+          <clipPath id="klip-b"><circle cx="27" cy="-30" r="25"/></clipPath>
+        </defs>
+        <g>
+          <animateMotion dur="22s" repeatCount="indefinite" rotate="0">
+            <mpath href="#rute"/>
+          </animateMotion>
+          <ellipse cx="0" cy="2" rx="52" ry="5" fill="rgba(0,0,0,.3)"/>
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur=".5s" repeatCount="indefinite"/>
+
+            <!-- Foto Shandi: simpan sebagai foto-shandi.jpg -->
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="-4 -27 -30;4 -27 -30;-4 -27 -30" dur="1s" repeatCount="indefinite"/>
+              <circle cx="-27" cy="-30" r="25" fill="#4aa3ff"/>
+              <text x="-27" y="-22" text-anchor="middle" font-size="22" font-weight="600" fill="#fff" font-family="Quicksand, sans-serif">S</text>
+              <image href="foto-shandi.jpeg" x="-52" y="-55" width="50" height="50" preserveAspectRatio="xMidYMid slice" clip-path="url(#klip-a)"/>
+              <circle cx="-27" cy="-30" r="25" fill="none" stroke="#fff" stroke-width="3"/>
+            </g>
+
+            <!-- Foto Agis: simpan sebagai foto-agis.jpg -->
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="4 27 -30;-4 27 -30;4 27 -30" dur="1s" repeatCount="indefinite"/>
+              <circle cx="27" cy="-30" r="25" fill="#ff6b8b"/>
+              <text x="27" y="-22" text-anchor="middle" font-size="22" font-weight="600" fill="#fff" font-family="Quicksand, sans-serif">A</text>
+              <image href="foto-agis.jpeg" x="2" y="-55" width="50" height="50" preserveAspectRatio="xMidYMid slice" clip-path="url(#klip-b)"/>
+              <circle cx="27" cy="-30" r="25" fill="none" stroke="#fff" stroke-width="3"/>
+            </g>
+
+            <!-- Hati penghubung -->
+            <text x="0" y="-24" text-anchor="middle" font-size="20" fill="#ff6b8b" stroke="#fff" stroke-width="1.5" paint-order="stroke">♥</text>
+
+            <!-- Nama -->
+            <text x="-27" y="-62" text-anchor="middle" font-size="12" font-weight="600" fill="#9ccbff" font-family="Quicksand, sans-serif">Shandi</text>
+            <text x="27" y="-62" text-anchor="middle" font-size="12" font-weight="600" fill="#ffb3c6" font-family="Quicksand, sans-serif">Agis</text>
+            <text x="0" y="-80" text-anchor="middle" font-size="14" fill="#ff6b8b">♥
+              <animate attributeName="y" values="-80;-90;-80" dur="1.6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="1;.4;1" dur="1.6s" repeatCount="indefinite"/>
+            </text>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <p class="sub">Waktu yang sudah kita lewati bersama</p>
+    <div class="hitung">
+      <div><strong id="h-hari">0</strong><span>hari</span></div>
+      <div><strong id="h-jam">0</strong><span>jam</span></div>
+      <div><strong id="h-menit">0</strong><span>menit</span></div>
+      <div><strong id="h-detik">0</strong><span>detik</span></div>
+    </div>
+    <p class="menuju">Menuju anniversary ke-<span id="m-ke"></span> pada <span id="m-tgl"></span><br><strong id="m-hari">0</strong> hari lagi</p>
+  </section>
+
+  <section>
+    <h2 class="judul">Momen favoritku</h2>
+    <p class="sub">Setiap foto menyimpan cerita kecil tentang kita</p>
+    <div class="galeri">
+      <!-- Ganti foto2.jpg sampai foto17.jpg dengan fotomu. Salin satu <figure> untuk menambah foto. -->
+      <figure tabindex="0"><img src="foto2.png" alt="Kamu, selalu kamu"><figcaption>Kamu, selalu kamu.</figcaption></figure>
+      <figure tabindex="0"><img src="foto3.png" alt="Selalu jatuh cinta."><figcaption>Selalu jatuh cinta.</figcaption></figure>
+      <figure tabindex="0"><img src="foto4.png" alt="Tak perlu banyak kata."><figcaption>Tak perlu banyak kata.</figcaption></figure>
+      <figure tabindex="0"><img src="foto5.png" alt="Ceritaku tentang kamu."><figcaption>Ceritaku tentang kamu.</figcaption></figure>
+      <figure tabindex="0"><img src="foto6.png" alt="Kok bisa secantik itu?"><figcaption>Kok bisa secantik itu?</figcaption></figure>
+      <figure tabindex="0"><img src="foto7.png" alt="Selfie favorit"><figcaption>Selfie favorit</figcaption></figure>
+      <figure tabindex="0"><img src="foto8.png" alt="Hal baik yang ingin dijaga."><figcaption>Hal baik yang ingin dijaga.</figcaption></figure>
+      <figure tabindex="0"><img src="foto9.png" alt="Orang yang tepat."><figcaption>Orang yang tepat.</figcaption></figure>
+      <figure tabindex="0"><img src="foto10.png" alt="Sekali lihat, langsung rindu."><figcaption>Sekali lihat, langsung rindu.</figcaption></figure>
+      <figure tabindex="0"><img src="foto11.png" alt="Sesederhana itu, seistimewa ini."><figcaption>Sesederhana itu, seistimewa ini.</figcaption></figure>
+      <figure tabindex="0"><img src="foto12.png" alt="Masih orang yang sama."><figcaption>Masih orang yang sama.</figcaption></figure>
+      <figure tabindex="0"><img src="foto13.png" alt="Senyummu favoritku"><figcaption>Senyummu favoritku</figcaption></figure>
+      <figure tabindex="0"><img src="foto14.png" alt="Menjaga yang berharga."><figcaption>Menjaga yang berharga.</figcaption></figure>
+      <figure tabindex="0"><img src="foto15.png" alt="Sejauh ini, masih yang terbaik."><figcaption>Sejauh ini, masih yang terbaik.</figcaption></figure>
+      <figure tabindex="0"><img src="foto16.png" alt="Tidak bosan dengan orang yang sama."><figcaption>Tidak bosan dengan orang yang sama.</figcaption></figure>
+      <figure tabindex="0"><img src="foto17.png" alt="Selamanya bersama"><figcaption>Selamanya bersamamu</figcaption></figure>
+    </div>
+
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Foto diperbesar">
+      <button class="lb-btn" id="lb-tutup" aria-label="Tutup">✕</button>
+      <button class="lb-btn" id="lb-prev" aria-label="Foto sebelumnya">‹</button>
+      <img id="lb-img" alt="">
+      <p id="lb-cap"></p>
+      <button class="lb-btn" id="lb-next" aria-label="Foto berikutnya">›</button>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="judul">Kata-kata untukmu</h2>
+    <p class="sub">Yang ingin selalu kuucapkan, Agis</p>
+    <div class="kata-grid">
+      <blockquote class="kata utama">Aku nggak pernah bosan mengenalmu, karena setiap hari selalu ada alasan baru untuk jatuh cinta.</blockquote>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="judul">Sedikit isi hatiku</h2>
+    <p class="sub">Kata-kata yang sering tertahan</p>
+    <div class="surat">
+      <p>Sayang, aku mungkin bukan orang yang paling pandai merangkai kata, tapi aku ingin kamu tahu bahwa kamu adalah rumah ternyaman untukku.</p>
+      <p>Di hari yang berat, ingat bahwa ada aku yang selalu di sisimu. Di hari yang bahagia, aku ingin menjadi orang pertama yang merayakannya bersamamu.</p>
+      <p>Terima kasih sudah memilihku, dan aku akan terus memilihmu.</p>
+      <p class="ttd">Yang selalu sayang kamu</p>
+    </div>
+  </section>
+</main>
+
+<footer>Shandi Kurnia Illahi &amp; Agis Agistianah<br>Happy Anniversary, Sayang 💖</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

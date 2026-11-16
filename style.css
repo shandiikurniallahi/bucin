@@ -1,0 +1,299 @@
+:root {
+  --bg: #2a0f1f;
+  --bg-2: #4a1530;
+  --rose: #ff6b8b;
+  --blush: #ffd9e2;
+  --gold: #f2c879;
+  --text: #fff3f6;
+  --muted: #e9b9c6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-attachment: fixed;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ---------- Hujan hati (atas ke bawah) ---------- */
+#hearts {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.heart {
+  position: absolute;
+  top: -10vh;
+  color: var(--rose);
+  opacity: .85;
+  animation-name: jatuh, goyang;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+@keyframes jatuh { to { top: 110vh; } }
+@keyframes goyang {
+  0%, 100% { transform: translateX(0) rotate(-12deg); }
+  50% { transform: translateX(40px) rotate(12deg); }
+}
+
+/* ---------- Layar pembuka ---------- */
+#gerbang {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center; text-align: center;
+  background: radial-gradient(circle at 50% 40%, #6b1d44 0%, var(--bg) 70%);
+  transition: opacity .9s ease, visibility .9s;
+  padding: 24px;
+}
+#gerbang.tutup { opacity: 0; visibility: hidden; }
+#gerbang h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  margin-bottom: 8px;
+}
+#gerbang p { color: var(--muted); margin-bottom: 28px; }
+.tombol {
+  font: inherit; font-weight: 500;
+  background: var(--rose); color: #3a0b1c;
+  border: 0; border-radius: 999px;
+  padding: 14px 36px; cursor: pointer;
+  box-shadow: 0 0 0 0 rgba(255,107,139,.6);
+  animation: denyut 1.8s infinite;
+}
+.tombol:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+/* Tombol berbentuk hati */
+.tombol.love {
+  position: relative; width: 200px; aspect-ratio: 32 / 29;
+  padding: 0; background: none; border-radius: 16px;
+  box-shadow: none; animation: detak 1.4s ease-in-out infinite;
+}
+.tombol.love svg {
+  display: block; width: 100%; height: 100%;
+  fill: var(--rose);
+  filter: drop-shadow(0 10px 24px rgba(255,107,139,.55));
+  transition: fill .25s;
+}
+.tombol.love:hover svg { fill: #ff8aa3; }
+.tombol.love span {
+  position: absolute; left: 0; right: 0; top: 36%;
+  text-align: center; line-height: 1.25;
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600;
+  font-size: 1.3rem; color: #3a0b1c;
+}
+@keyframes detak {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.07); }
+  60% { transform: scale(1); }
+}
+@keyframes denyut {
+  70% { box-shadow: 0 0 0 18px rgba(255,107,139,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,107,139,0); }
+}
+
+/* ---------- Konten ---------- */
+main { position: relative; z-index: 2; }
+section { max-width: 960px; margin: 0 auto; padding: 90px 24px; }
+
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: 28px;
+}
+.foto-utama {
+  width: clamp(200px, 50vw, 300px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px solid var(--gold);
+  box-shadow: 0 0 0 10px rgba(242,200,121,.15), 0 20px 60px rgba(0,0,0,.5);
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--rose), var(--bg-2));
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 8vw, 4.6rem);
+  line-height: 1.15;
+  font-weight: 600;
+}
+.hero h1 em { color: var(--rose); font-style: italic; }
+.hero .lencana {
+  display: inline-block; max-width: none;
+  padding: 8px 22px; border-radius: 999px;
+  border: 1px solid var(--gold); color: var(--gold);
+  background: rgba(242,200,121,.1);
+  font-weight: 500;
+}
+.hero .nama {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.15rem, 4vw, 1.7rem);
+  color: var(--gold); max-width: none;
+}
+.hero .nama span { color: var(--rose); padding: 0 .3em; font-style: normal; }
+.hero p { color: var(--muted); max-width: 46ch; }
+
+h2.judul {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.sub { text-align: center; color: var(--muted); margin-bottom: 44px; }
+
+/* Hitung waktu */
+.hitung { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.hitung div {
+  min-width: 96px; padding: 18px 14px; text-align: center;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,217,226,.25);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+}
+.hitung strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; color: var(--gold);
+}
+.hitung span { font-size: .85rem; color: var(--muted); }
+.menuju {
+  max-width: 520px; margin: 40px auto 0; padding: 22px 24px; text-align: center;
+  border: 1px dashed rgba(242,200,121,.6); border-radius: 18px;
+  background: rgba(242,200,121,.07);
+}
+.menuju strong { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.6rem; }
+
+/* Jalan perjalanan */
+.jalan-wrap {
+  overflow-x: auto;
+  margin-bottom: 56px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,217,226,.2);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.09));
+}
+.jalan { display: block; width: 100%; min-width: 720px; height: auto; }
+.jalan .tgl { fill: var(--gold); font: 600 15px 'Quicksand', sans-serif; }
+.jalan .ket { fill: var(--blush); font: 500 14px 'Quicksand', sans-serif; }
+
+/* Galeri */
+.galeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.galeri figure {
+  background: #fff; padding: 12px 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.45);
+  transition: transform .35s ease;
+  cursor: zoom-in;
+}
+.galeri figure:nth-child(odd)  { transform: rotate(-2deg); }
+.galeri figure:nth-child(even) { transform: rotate(2deg); }
+.galeri figure:hover { transform: rotate(0) scale(1.04); }
+.galeri figure:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+.galeri img {
+  display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover;
+  background: linear-gradient(135deg, var(--rose), var(--bg-2));
+}
+.galeri figcaption {
+  color: #5a2036; text-align: center; margin-top: 12px;
+  font-family: 'Playfair Display', serif; font-style: italic;
+}
+
+/* Zoom foto (lightbox) */
+#lightbox {
+  position: fixed; inset: 0; z-index: 60;
+  display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  background: rgba(25,6,15,0);
+  backdrop-filter: blur(0);
+  transition: background .5s ease, backdrop-filter .5s ease;
+  padding: 20px;
+}
+#lightbox.aktif { display: flex; }
+#lightbox.terang { background: rgba(25,6,15,.88); backdrop-filter: blur(8px); }
+#lb-img {
+  width: min(90vw, 68vh * 0.8);
+  aspect-ratio: 4/5; object-fit: cover;
+  border: 10px solid #fff; border-radius: 6px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  background: linear-gradient(135deg, var(--rose), var(--bg-2));
+  transform-origin: center center;
+}
+#lb-cap {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: var(--blush); opacity: 0; transition: opacity .4s ease .3s;
+}
+#lightbox.terang #lb-cap { opacity: 1; }
+.lb-btn {
+  position: absolute; border: 0; cursor: pointer;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.15); color: #fff; font-size: 1.5rem;
+  opacity: 0; transition: opacity .4s ease .3s, background .2s;
+}
+#lightbox.terang .lb-btn { opacity: 1; }
+.lb-btn:hover { background: var(--rose); }
+.lb-btn:focus-visible { outline: 3px solid var(--gold); }
+#lb-tutup { top: 18px; right: 18px; }
+#lb-prev { left: 14px; top: 50%; }
+#lb-next { right: 14px; top: 50%; }
+
+/* Kata-kata romantis */
+.kata-grid {
+  display: grid; gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.kata {
+  position: relative;
+  padding: 34px 26px 26px;
+  background: rgba(255,243,246,.07);
+  border: 1px solid rgba(255,217,226,.2);
+  border-radius: 20px;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.15rem; line-height: 1.75;
+  color: var(--blush);
+}
+.kata::before {
+  content: '\201C'; position: absolute; top: 2px; left: 18px;
+  font-size: 3.2rem; line-height: 1; color: var(--rose); font-style: normal;
+}
+.kata.utama {
+  grid-column: 1 / -1; text-align: center;
+  font-size: clamp(1.3rem, 3.6vw, 1.75rem);
+  padding: 46px 32px 36px;
+  border-color: rgba(242,200,121,.5);
+  background: rgba(242,200,121,.08);
+}
+.kata.utama::before { left: 50%; transform: translateX(-50%); top: 6px; color: var(--gold); }
+
+/* Surat */
+.surat {
+  max-width: 640px; margin: 0 auto;
+  padding: 44px 36px;
+  background: rgba(255,243,246,.08);
+  border-left: 4px solid var(--rose);
+  border-radius: 0 20px 20px 0;
+}
+.surat p { margin-bottom: 16px; }
+.surat .ttd { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); text-align: right; }
+
+footer { position: relative; z-index: 2; text-align: center; padding: 40px 20px 90px; color: var(--muted); }
+
+/* Tombol musik */
+#musik {
+  position: fixed; right: 18px; bottom: 18px; z-index: 40;
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 0; cursor: pointer; font-size: 1.4rem;
+  background: var(--rose); color: #3a0b1c;
+  box-shadow: 0 8px 22px rgba(0,0,0,.4);
+}
+#musik:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .heart { animation-duration: 20s !important; }
+  .tombol, .tombol.love { animation: none; }
+}
